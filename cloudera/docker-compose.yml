@@ -1,0 +1,20 @@
+---
+version: '2'
+volumes:
+  cloudera:
+
+services:
+  cloudera:
+    container_name: cloudera 
+    image: cloudera/quickstart:latest
+    hostname: quickstart.cloudera 
+    ports:
+      - '7180:7180'
+      - '8888:8888'
+    volumes:
+      - cloudera:/var/lib/hadoop-hdfs
+    privileged: true
+    stdin_open: true
+    tty: true
+    command:
+      - /usr/bin/docker-quickstart 

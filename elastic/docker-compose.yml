@@ -1,0 +1,25 @@
+---
+version: '2'
+volumes:
+  elasticsearch:
+
+services:
+  elasticsearch:
+    container_name: elasticsearch 
+    image: elasticsearch:5.0.1
+    hostname: elasticsearch 
+    ports:
+      - '9200:9200'
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    environment:
+      ES_JAVA_OPTS: "-Xms4g -Xmx4g" 
+
+  kibana:
+    container_name: kibana 
+    image: kibana:5.0.1
+    hostname: kibana 
+    depends_on:
+      - elasticsearch 
+    ports:
+      - '5601:5601'
