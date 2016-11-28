@@ -1,0 +1,14 @@
+curl -X POST \
+     -H "Content-Type: application/json" \
+     --data '{
+        "name": "replicator-src-a-foo",
+        "config": {
+          "connector.class":"io.confluent.connect.replicator.ReplicatorSourceConnector",
+          "key.converter": "io.confluent.connect.replicator.util.ByteArrayConverter",
+          "value.converter": "io.confluent.connect.replicator.util.ByteArrayConverter",
+          "src.zookeeper.connect": "localhost:22181",
+          "src.kafka.bootstrap.servers": "localhost:9092",
+          "dest.zookeeper.connect": "localhost:42181",
+          "topic.whitelist": "foo",
+          "topic.rename.format": "${topic}.replica"}}'  \
+     http://localhost:28082/connectors

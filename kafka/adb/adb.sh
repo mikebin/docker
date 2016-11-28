@@ -25,6 +25,8 @@ confluent-rebalancer finish --zookeeper zookeeper:2181
 
 kafka-topics --topic adb-test --describe --zookeeper zookeeper:2181
 
+docker-compose up -d kafka3 kafka4 kafka5
+
 confluent-rebalancer execute --zookeeper zookeeper:2181 --metrics-bootstrap-server kafka2:9092 --throttle 100000000 --force --verbose
 
 confluent-rebalancer status --zookeeper zookeeper:2181
@@ -33,4 +35,4 @@ confluent-rebalancer finish --zookeeper zookeeper:2181
 
 kafka-topics --topic adb-test --describe --zookeeper zookeeper:2181
 
-docker-compose up -d kafka3 kafka4 kafka5
+docker-compose down
