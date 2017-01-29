@@ -6,7 +6,7 @@ volumes:
 services:
   elasticsearch:
     container_name: elasticsearch 
-    image: elasticsearch:5.0.1
+    image: elasticsearch:5.1.2
     hostname: elasticsearch 
     ports:
       - '9200:9200'
@@ -17,7 +17,7 @@ services:
 
   kibana:
     container_name: kibana 
-    image: kibana:5.0.1
+    image: kibana:5.1.2
     hostname: kibana 
     depends_on:
       - elasticsearch 
