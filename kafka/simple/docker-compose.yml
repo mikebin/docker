@@ -1,0 +1,37 @@
+---
+version: '2'
+
+volumes:
+  zookeeper:
+  kafka:
+
+services:
+  zookeeper:
+    container_name: zookeeper
+    image: confluentinc/cp-zookeeper:3.1.1
+    hostname: zookeeper
+    ports:
+      - "2181:2181"
+    volumes:
+      - zookeeper:/var/lib/zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    container_name: kafka 
+    image: confluentinc/cp-enterprise-kafka:3.1.1
+    hostname: kafka 
+    depends_on:
+      - zookeeper
+    ports:
+      - ':9092:9092'
+    volumes:
+      - kafka:/var/lib/kafka/
+    environment:
+      KAFKA_BROKER_ID: 0
+      KAFKA_BROKER_RACK: 1
+      KAFKA_LOG_DIRS: '/var/lib/kafka/data'
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://0.0.0.0:9092'
+
